@@ -1,0 +1,220 @@
+#include<iostream>
+#include<windows.h>
+#include<conio.h>
+using namespace std;
+struct doc{
+    string name, mbbsID, address;
+    int contact, salary;
+};
+doc e[50];
+int total=0;
+void empdata(){
+    int choice;
+    cout<<"\n\nHow many doctors data do you want to enter ?"<<endl;
+    cin>>choice;
+    for(int i=total; i<total+choice; i++){
+        cout<<"\nEnter the data of doctor"<<i+1<<endl;
+        cout<<"Enter the name:"<<endl;
+        cin>>e[i].name;
+        cout<<"Enter the MBBS ID:"<<endl;
+        cin>>e[i].mbbsID;
+        cout<<"Enter the address:"<<endl;
+        cin>>e[i].address;
+        cout<<"Enter the contact:"<<endl;
+        cin>>e[i].contact;
+        cout<<"Enter the salary:"<<endl;
+        cin>>e[i].salary;
+    }
+    total= total+choice;
+}
+void show(){
+    if(total != 0){
+        for(int i=0; i<total; i++){
+        cout<<"\nData of doctor "<<i+1<<endl;
+        cout<<"Doctor name: "<<e[i].name<<endl;
+        cout<<"MBBS ID: "<<e[i].mbbsID<<endl;
+        cout<<"Address: "<<e[i].address<<endl;
+        cout<<"Salary: "<<e[i].salary<<endl;
+        cout<<"Contact: "<<e[i].contact<<endl;
+        }
+    }
+    else{
+        cout<<"Your record is empty"<<endl;
+    }
+
+}
+void search(){
+    if(total != 0){
+        string ID;
+        cout<<"\n\nEnter MBBS ID of doctor, whom you want to search"<<endl;
+        cin>>ID;
+        for(int i=0; i<total; i++){
+            if (ID==e[i].mbbsID){
+            cout<<"\nData of doctor "<<i+1<<endl;
+            cout<<"Doctor name: "<<e[i].name<<endl;
+            cout<<"MBBS ID: "<<e[i].mbbsID<<endl;
+            cout<<"Address: "<<e[i].address<<endl;
+            cout<<"Salary: "<<e[i].salary<<endl;
+            cout<<"Contact: "<<e[i].contact<<endl;
+            break;
+            }
+            if(i==total-1){
+               cout<<"No such record found"<<endl;
+        }
+
+              
+        }
+
+    }else{
+        cout<<"Your record is empty"<<endl;
+      }
+    
+}
+void update(){
+    if(total != 0){
+        string ID;
+        cout<<"\n\nEnter MBBS ID of doctor which you want to update: "<<endl;
+        cin>>ID;
+        for (int i=0; i<total; i++){
+        if (ID==e[i].mbbsID){
+            cout<<"\nPrevious data of doctor "<<i+1<<endl;
+            cout<<"Doctor name: "<<e[i].name<<endl;
+            cout<<"MBBS ID: "<<e[i].mbbsID<<endl;
+            cout<<"Address: "<<e[i].address<<endl;
+            cout<<"Salary: "<<e[i].salary<<endl;
+            cout<<"Contact: "<<e[i].contact<<endl;
+            cout<<"\nEnter new Data"<<endl;
+            
+            cout<<"Enter the doctor name:"<<endl;
+            cin>>e[i].name;
+            cout<<"Enter the MBBS ID:"<<endl;
+            cin>>e[i].mbbsID;
+            cout<<"Enter the address:"<<endl;
+            cin>>e[i].address;
+            cout<<"Enter the contact:"<<endl;
+            cin>>e[i].contact;
+            cout<<"Enter the salary:"<<endl;
+            cin>>e[i].salary;
+            break;
+
+    }
+        if (i==total-1){
+        cout<<"No such record found"<<endl;
+        }
+    }    
+
+}
+}
+void del(){
+    if(total !=0){
+        char user;
+        cout<<"Press 1 to delete full record"<<endl;
+        cout<<"Press 2 to delete specific record"<<endl;
+        user=getch();
+        if(user=='1'){
+            total=0;
+            cout<<"All record is deleted ...!!"<<endl;
+        }
+        else if (user =='2'){
+            string ID;
+            cout<<"Enter MBBS ID of doctor which you want to delete"<<endl;
+            cin>>ID;
+            for(int i=0;i<total; i++){
+                if(ID==e[i].mbbsID){
+                    for(int j=i; j<total; j++){
+                    e[j].name=e[j+1].name;
+                    e[j].address=e[j+1].address;
+                    e[j].contact=e[+1].contact;
+                    e[j].salary=e[j+1].salary;
+                    total--;
+                    break;
+                    }
+                    if(i==total-1){
+                        cout<<"No such record found"<<endl;
+                    }
+                }
+            }
+        
+        }
+    }
+    else{
+        cout<<"You record id empty"<<endl;
+    }
+
+}
+int main()
+{
+    cout<<"\n\n\t\tHospital Management System"<<endl;
+    cout<<"\n\n\t\tSignup"<<endl;
+    string Username, Password;
+    cout<<"\n\t\tEnter Username: ";
+    cin>>Username;
+    cout<<"\n\t\tEnter Password: ";
+    cin>>Password;
+    cout<<"\n\t\tYour MBBS ID is creating please wait";
+    for(int i = 0; i<8; i++){
+        cout<<".";
+        Sleep(200);
+    }
+    cout<<"\n\n\t\tYour ID created successfully"<<endl;
+    system("CLS");
+    start:
+    cout<<"\n\n\t\tHospital Management System"<<endl;
+    cout<<"\n\n\t\tLogin"<<endl;
+    string Username1, Password1;
+    cout<<"Username:";
+    cin>>Username1;
+    cout<<"Password:";
+    cin>>Password1;
+
+    if(Username1==Username&&Password1==Password){
+        system("CLS");
+        char user;
+        while(1){
+            cout<<"\n\nPress 1 to enter data"<<endl;
+            cout<<"\n\nPress 2 to show data"<<endl;
+            cout<<"\n\nPress 3 to search data"<<endl;
+            cout<<"\n\nPress 4 to update data"<<endl;
+            cout<<"\n\nPress 5 to delete data"<<endl;
+            cout<<"\n\nPress 6 to logout"<<endl;
+            cout<<"\n\nPress 7 to exit"<<endl<<endl;
+            user=getch();
+            switch(user){
+                case '1':
+                      empdata();
+                case '2':
+                      show();
+                      break;
+                case '3':
+                      search();
+                      break;
+                case '4':
+                      update();
+                      break;
+                case '5':
+                      del();
+                      break;
+                case '6':
+                      goto start;
+                      break;
+                case '7':
+                    cout<<"Your operation has ended"<<endl;
+                
+                return 0;
+             
+            }
+
+        }
+
+    }   
+    else if(Username1!=Username){
+        cout<<"Your username is incorrect"<<endl;
+        Sleep(2000);
+        goto start;
+    }   
+    else if(Password1!=Password){
+        cout<<"Your Password is incorrect"<<endl;
+        goto start;
+    }
+    return 0;
+    }
